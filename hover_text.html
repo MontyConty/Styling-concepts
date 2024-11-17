@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Text Scroller</title>
+    <style>
+        /* Main container styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f2f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .scroller-container {
+            width: 60%;
+            height: 300px;
+            overflow: hidden;
+            border: 2px solid #333;
+            border-radius: 10px;
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .scroll-text {
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            line-height: 1.6;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Animation to move the text upwards */
+        @keyframes scroll {
+            0% { top: 100%; }
+            100% { top: -200%; }
+        }
+
+        /* Apply the animation */
+        .scroll-text {
+            animation: scroll 30s linear infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroller-container">
+        <div class="scroll-text">
+            <p>A ransomware attack typically involves a cybercriminal gaining access to an organization’s network, encrypting critical data, and demanding payment (often in cryptocurrency) to provide a decryption key. Here’s a breakdown of a typical ransomware attack scenario and key mitigation techniques:</p>
+            
+            <h3>Ransomware Attack Scenario: "Hospital Network Compromise"</h3>
+
+            <p>This is the second blog post in a series, sharing MITRE’s experiences detecting and responding to a nation-state cyber threat actor incident in our research and experimentation network, NERVE. It follows our April 19, 2024 posting, “Advanced Cyber Threats Impact Even the Most Prepared”.
+                In this post, we take a deep dive into the technical details of the intrusion, including timeline and how to potentially detect this type of activity in your own environment. This blog focuses on a thorough accounting of the threat actor’s tactics, techniques, and procedures.
+                In the ever-evolving landscape of cybersecurity, understanding the intricacies of a cyber intrusion is paramount for organizations seeking to fortify their defenses. This knowledge is the foundation of a threat-informed defense.
+                The indicators observed during the incident overlap with those described in the Mandiant threat intelligence report on UNC5221, a “China-nexus espionage threat actor”. In this blog post, we have provided the associated Indicators of Compromise in Appendix 1 and a short blurb on the Malware Analysis.
+                Additionally, our blog post includes novel aspects not previously reported in Mandiant or other threat intelligence, including:
+                •	Details on the BEEFLUSH web shell, which was not identified in prior reporting; and
+                •	Unique components of the BUSHWALK web shell seen in our incident.
+                Our next blog post is targeted for the week of May 12, 2024, and will include additional details on the adversary’s novel persistence techniques within our VMware infrastructure and provide tools for detection.
+                </p>
+
+            <p><strong>1 Recap from Part One</strong> In our previous blog post, we shared the experience of facing a sophisticated cyber intrusion that targeted MITRE’s Networked Experimentation, Research, and Virtualization Environment (NERVE) through two Ivanti Connect Secure zero-day vulnerabilities that bypassed our multi-factor authentication. The adversary maneuvered within the research network via VMware infrastructure using a compromised administrator account, then employed a combination of backdoors and web shells to maintain persistence and harvest credentials.</p>
+            
+            <p><strong>2. Attack Scenario:</strong> The information described in this section represents adversary activities around which we have high confidence through our ongoing forensic investigation. As that investigation continues, we expect subsequent blog posts will share further detail.
+                UPDATE: In addition description below, we have also included an Attack Flow for a visual representation of the attack scenario.
+                </p>
+            
+            <p><strong>December 31, 2023: First Evidence of Intrusion</strong>The adversary deployed the ROOTROT web shell (as described by Mandiant) on an external-facing Ivanti appliance, gaining initial access to NERVE, a MITRE prototyping network. This early intrusion leveraged multiple Ivanti Connect Secure zero-day vulnerabilities (CVE-2023–46805 and CVE-2024–21887) for unauthorized access before the initial disclosure of vulnerabilities on January 10th and before patches were available. By leveraging this access point, the adversary infiltrated the NERVE network, circumventing multi-factor authentication, and established a foothold for subsequent activities. The subsequent hijacking of sessions and utilization of RDP over HTML5 capabilities allowed the adversary to establish connections to systems within the NERVE.
+                Initial access is a crucial step in the cyber kill chain, allowing adversaries to infiltrate target networks. By exploiting zero-day vulnerabilities, adversaries can bypass security measures and gain early access, providing them with the opportunity to conduct discovery and lay the groundwork for further exploitation.</p>
+            <p><strong>January 4, 2024: Adversary profiles environment</strong>The adversary profiled MITRE’s NERVE environment, interacting with vCenter from the compromised Ivanti appliance, establishing communication with multiple ESXi hosts. Subsequently, they successfully logged into several accounts within the NERVE via RDP, leveraging hijacked credentials to access user bookmarks and file shares to gain insights into the network architecture.
+                Post-exploitation discovery is essential for adversaries to gather knowledge about the system, identify vulnerabilities, and plan subsequent actions. By profiling the environment and harvesting credentials, adversaries can understand the network’s layout and potential security weaknesses, enabling them to maximize the effectiveness of their attacks. This discovery activity, culminating in document exfiltration, aimed to map the network topology and identify high-value targets for future exploitation.
+                </p>
+            
+                
